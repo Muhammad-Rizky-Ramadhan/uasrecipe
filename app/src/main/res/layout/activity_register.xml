@@ -1,0 +1,70 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Create Account"
+            android:paddingTop="8dp"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="#9A7B2B"/>
+
+        <EditText
+            android:id="@+id/usernameRegis"
+            android:hint="masukkan username"
+            android:paddingLeft="14dp"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp" />
+
+        <EditText
+            android:id="@+id/nameRegis"
+            android:paddingLeft="14dp"
+            android:hint="masukkan nama"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp" />
+
+        <EditText
+            android:id="@+id/passwordRegis"
+            android:hint="masukkan password"
+            android:paddingLeft="14dp"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:inputType="textPassword" />
+
+        <Button
+            android:id="@+id/btnRegis"
+            android:layout_width="146dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="#8D6E63"
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="12dp"
+            android:text="Create"
+            android:textColor="#FFFFFF" />
+
+
+    </LinearLayout>
+</LinearLayout>
