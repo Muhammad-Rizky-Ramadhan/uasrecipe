@@ -13,13 +13,20 @@
 
     <fragment
         android:id="@+id/navigation_category"
-        android:name="com.example.myrecipe1.ui.dashboard.DashboardFragment"
+        android:name="com.example.myrecipe1.ui.category.CategoryFragment"
         android:label="@string/title_category"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_category" />
 
     <fragment
         android:id="@+id/navigation_add"
-        android:name="com.example.myrecipe1.ui.notifications.NotificationsFragment"
+        android:name="com.example.myrecipe1.ui.add.AddFragment"
         android:label="@string/title_add"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_add" />
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.example.myrecipe1.ui.profile.ProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_profile" />
+
 </navigation>
