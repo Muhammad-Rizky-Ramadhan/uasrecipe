@@ -1,6 +1,6 @@
 package com.example.myrecipe1.api;
 
-//import com.example.myrecipe1.model.category.Category;
+import com.example.myrecipe1.model.category.Category;
 import com.example.myrecipe1.model.login.Login;
 import com.example.myrecipe1.model.register.Register;
 
@@ -27,7 +27,7 @@ public interface ApiInterface {
             @Field("name") String name
     );
 
-//    @GET("category.php")
-//    Call<Category> CategoryResponse(
-//    );
+    @GET("category.php")
+    Call<Category> CategoryResponse(
+    );
 }
