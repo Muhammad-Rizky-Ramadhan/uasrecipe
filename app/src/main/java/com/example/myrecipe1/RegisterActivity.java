@@ -40,7 +40,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         btnRegis = findViewById(R.id.btnRegis);
         btnRegis.setOnClickListener(this);
 
-        tvLogin = findViewById(R.id.btnRegis);
+        tvLogin = findViewById(R.id.tvToLogin);
         tvLogin.setOnClickListener(this);
     }
 
@@ -52,6 +52,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             Name = etName.getText().toString();
             register(Username, Password, Name);
         } else if (v.getId() == R.id.btnRegis) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        } else if(v.getId() == R.id.tvToLogin){
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }

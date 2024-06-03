@@ -1,6 +1,5 @@
 package com.example.myrecipe1;
 
-
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,7 +21,6 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     EditText etUsername, etPassword;
     Button btnLogin;
-    String username, password;
     TextView tvRegis;
     ApiInterface apiInterface;
     SessionManager sessionManager;
@@ -32,13 +30,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        sessionManager = new SessionManager(this);
+        if (sessionManager.isLoggedIn()) {
+            navigateToMainActivity();
+            return;
+        }
+
         etUsername = findViewById(R.id.usernameLogin);
         etPassword = findViewById(R.id.passwordLogin);
         btnLogin = findViewById(R.id.btnLogin);
         tvRegis = findViewById(R.id.tvToRegis);
 
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        sessionManager = new SessionManager(this);
 
         btnLogin.setOnClickListener(this);
         tvRegis.setOnClickListener(this);
@@ -47,33 +50,36 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btnLogin) {
-            username = etUsername.getText().toString();
-            password = etPassword.getText().toString();
-            login(username, password);
+            String username = etUsername.getText().toString().trim();
+            String password = etPassword.getText().toString().trim();
+            if (!username.isEmpty() && !password.isEmpty()) {
+                login(username, password);
+            } else {
+                Toast.makeText(this, "Username and Password cannot be empty", Toast.LENGTH_SHORT).show();
+            }
         } else if (v.getId() == R.id.tvToRegis) {
             Intent intent = new Intent(this, RegisterActivity.class);
             startActivity(intent);
         }
     }
+
     private void login(String username, String password) {
-        apiInterface = ApiClient.getClient().create(ApiInterface.class);
         Call<Login> loginCall = apiInterface.LoginResponse(username, password);
         loginCall.enqueue(new Callback<Login>() {
             @Override
             public void onResponse(Call<Login> call, Response<Login> response) {
-
-
-
-                if (response.body() != null && response.isSuccessful() && response.body().isStatus()){
-                    sessionManager = new SessionManager(LoginActivity.this);
-                    LoginData loginData = response.body().getData();
-                    sessionManager.createLoginSession(loginData);
-                    Toast.makeText(LoginActivity.this, response.body().getData().getName(),  Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginActivity.this ,MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                } else{
-                    Toast.makeText(LoginActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                if (response.isSuccessful() && response.body() != null) {
+                    if (response.body().isStatus()) {
+                        // Get login data and create login session
+                        LoginData loginData = response.body().getData();
+                        sessionManager.createLoginSession(loginData);
+                        Toast.makeText(LoginActivity.this, "Welcome, " + loginData.getName(), Toast.LENGTH_SHORT).show();
+                        navigateToMainActivity();
+                    } else {
+                        Toast.makeText(LoginActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(LoginActivity.this, "Login failed. Please try again.", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -82,5 +88,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Toast.makeText(LoginActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void navigateToMainActivity() {
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
