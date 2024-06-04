@@ -2,6 +2,7 @@ package com.example.myrecipe1.api;
 
 import com.example.myrecipe1.model.category.Category;
 import com.example.myrecipe1.model.login.Login;
+import com.example.myrecipe1.model.recipes.Recipes;
 import com.example.myrecipe1.model.register.Register;
 
 import retrofit2.Call;
@@ -29,5 +30,9 @@ public interface ApiInterface {
 
     @GET("category.php")
     Call<Category> CategoryResponse(
+    );
+
+    @GET("recipes.php")
+    Call<Recipes> RecipesResponse(
     );
 }

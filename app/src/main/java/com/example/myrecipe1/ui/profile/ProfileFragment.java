@@ -8,9 +8,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -22,10 +19,8 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.myrecipe1.LoginActivity;
-import com.example.myrecipe1.MainActivity;
 import com.example.myrecipe1.R;
 import com.example.myrecipe1.SessionManager;
 
@@ -38,9 +33,8 @@ public class ProfileFragment extends Fragment {
 
     private static final int PICK_IMAGE = 1;
     private static final int REQUEST_PERMISSION = 100;
-    private ProfileViewModel mViewModel;
     private ImageView profilePicture;
-    private Button btnEditProfile;
+    private Button btnEditProfile, btnLogout;
 
     public static ProfileFragment newInstance() {
         return new ProfileFragment();
@@ -53,6 +47,7 @@ public class ProfileFragment extends Fragment {
 
         profilePicture = root.findViewById(R.id.profilePicture);
         btnEditProfile = root.findViewById(R.id.btnEditProfile);
+        btnLogout = root.findViewById(R.id.btnLogout);
         etName = root.findViewById(R.id.nameProfile);
         etUsername = root.findViewById(R.id.usernameProfile);
 
@@ -77,30 +72,18 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        // Enable options menu in fragment
-        setHasOptionsMenu(true);
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sessionManager.logoutSession();
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
 
         return root;
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_profile, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_logout) {
-            // Handle logout action
-            sessionManager.logoutSession();
-            Intent intent = new Intent(getActivity(), LoginActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            getActivity().finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     private void openGallery() {
