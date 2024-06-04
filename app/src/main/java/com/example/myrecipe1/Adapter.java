@@ -1,6 +1,7 @@
 package com.example.myrecipe1;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     public void onBindViewHolder(@NonNull Adapter.ViewHolder holder, int position) {
         DataItem dataItem = arrayModel.get(position);
         holder.tvName.setText(dataItem.getNameCategory());
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), RecipesActivity.class);
+            String id_category = dataItem.getIdCategory();
+            intent.putExtra("id_category", id_category);
+            v.getContext().startActivity(intent);
+        });
     }
 
     @Override

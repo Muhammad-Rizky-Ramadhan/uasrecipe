@@ -12,22 +12,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myrecipe1.R;
-import com.example.myrecipe1.model.recipes.DataItem;
+import com.example.myrecipe1.model.findrecipebycategory.DataItem;
 
 import java.util.List;
 
-public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder> {
+public class FindRecipeByCategoryAdapter extends RecyclerView.Adapter<FindRecipeByCategoryAdapter.RecipeViewHolder> {
 
     private List<DataItem> recipeList;
     private Context context;
 
-    public RecipeAdapter(Context context, List<DataItem> recipeList) {
+    public FindRecipeByCategoryAdapter(Context context, List<DataItem> recipeList) {
         this.context = context;
         this.recipeList = recipeList;
     }
-
-
-
 
     @NonNull
     @Override

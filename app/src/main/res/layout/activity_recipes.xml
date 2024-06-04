@@ -40,7 +40,7 @@
 
     <!-- Recipe Items -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/Recipes_recycleview"
+        android:id="@+id/Recipess_recycleview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/list_recipes" />
