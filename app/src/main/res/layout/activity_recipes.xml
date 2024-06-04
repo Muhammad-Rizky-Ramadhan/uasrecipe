@@ -35,8 +35,8 @@
         android:layout_height="wrap_content"
         android:scaleType="centerCrop"
         android:src="@drawable/ethome2"
-        android:layout_margin="5dp"/>
-    
+        android:layout_margin="10dp"/>
+
 
     <!-- Recipe Items -->
     <androidx.recyclerview.widget.RecyclerView
