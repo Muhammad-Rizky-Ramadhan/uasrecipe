@@ -1,0 +1,6 @@
+<!-- res/drawable/bgdetail.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#FFF7F7"/> <!-- Ganti dengan warna latar belakang yang diinginkan -->
+    <corners android:radius="10dp"/> <!-- Radius sudut, sesuaikan dengan keinginan -->
+    <stroke android:width="3dp" android:color="#BDAEAE"/> <!-- Warna dan ketebalan garis tepi -->
+</shape>

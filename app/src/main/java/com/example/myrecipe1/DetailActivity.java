@@ -1,6 +1,8 @@
 package com.example.myrecipe1;
 
 import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,10 +17,27 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_detail);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
+
+
+        // Retrieve data from intent
+        String nama = getIntent().getStringExtra("nama");
+        String waktu = getIntent().getStringExtra("waktu");
+        String ingredients = getIntent().getStringExtra("ingredients");
+        String steps = getIntent().getStringExtra("steps");
+
+        // Find views
+        ImageView imageView = findViewById(R.id.imageView);
+        TextView titleTextView = findViewById(R.id.titleTextView);
+        TextView timeTextView = findViewById(R.id.timeTextView);
+        TextView ingredientsTextView = findViewById(R.id.ingredientsTextView);
+        TextView stepsTextView = findViewById(R.id.StepsTextView);
+
+        // Set data to views
+        imageView.setImageResource(R.drawable.bglogin); // Set a default image, this can be updated as needed
+        titleTextView.setText(nama);
+        timeTextView.setText(waktu);
+        ingredientsTextView.setText(ingredients);
+        stepsTextView.setText(steps);
     }
 }

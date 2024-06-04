@@ -1,6 +1,7 @@
 package com.example.myrecipe1;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +42,15 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         // Set default values for time and description
         holder.recipeTime.setText("25 MIN");
         holder.recipeDescription.setText("Default description");
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), DetailActivity.class);
+            intent.putExtra("nama", recipe.getName());
+            intent.putExtra("waktu", "25 mins");
+            intent.putExtra("ingredients", recipe.getIngredients());
+            intent.putExtra("steps", recipe.getSteps());
+            v.getContext().startActivity(intent);
+        });
     }
 
     @Override

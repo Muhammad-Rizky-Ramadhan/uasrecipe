@@ -70,7 +70,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="1 pasang dada ayam\n2 sdm minyak\n2 sdt bawang putih halus / bubuk bawang putih\n1 sdm mustard\n1 sdm jus lemon / kecap inggris\n1 sdt bubuk paprika\n¾ sdt garam\n1 sdt gula\n¼ sdt lada hitam\n\nBahan saus mushroom:\n2 buah jamur shitake\n10 buah jamur champignon\n4 siung bawang putih halus\n5 siung bawang merah halus\nThyme secukupnya\n2 sdm mentega\n150 ml krim\n200 ml air\n¼ sdt garam\n½ sdt gula\n¼ sdt merica"
+            android:text=""
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:fontFamily="@font/poppins"
+            android:background="@drawable/bgdetail"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/StepsTitleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="How to : "
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:fontFamily="@font/poppinsbold"/>
+
+        <TextView
+            android:id="@+id/StepsTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text=""
             android:textSize="16sp"
             android:textColor="@android:color/black"
             android:fontFamily="@font/poppins"
