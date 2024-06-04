@@ -23,6 +23,7 @@ import androidx.fragment.app.Fragment;
 import com.example.myrecipe1.LoginActivity;
 import com.example.myrecipe1.R;
 import com.example.myrecipe1.SessionManager;
+import com.example.myrecipe1.SplashActivity;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -76,7 +77,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 sessionManager.logoutSession();
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                Intent intent = new Intent(getActivity(), SplashActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 getActivity().finish();

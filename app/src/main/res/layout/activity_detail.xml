@@ -74,8 +74,9 @@
             android:textSize="16sp"
             android:textColor="@android:color/black"
             android:fontFamily="@font/poppins"
-            android:background="@drawable/bgdetail"
             android:padding="10dp"/>
+<!--            android:background="@drawable/bgdetail"-->
+
 
     </LinearLayout>
 </ScrollView>
