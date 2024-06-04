@@ -1,0 +1,81 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Gambar Makanan -->
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bglogin" />
+
+        <!-- Judul Makanan -->
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Grilled Chicken With Mushroom"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:fontFamily="@font/poppinsbold"/>
+
+        <!-- Waktu Memasak -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <ImageView
+                android:id="@+id/timeIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_time" />
+
+            <TextView
+                android:id="@+id/timeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="15 menit"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:fontFamily="@font/poppins"/>
+        </LinearLayout>
+
+        <!-- Judul Ingredients -->
+        <TextView
+            android:id="@+id/ingredientsTitleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Ingredients"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:fontFamily="@font/poppinsbold"/>
+
+        <!-- Daftar Ingredients -->
+        <TextView
+            android:id="@+id/ingredientsTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="1 pasang dada ayam\n2 sdm minyak\n2 sdt bawang putih halus / bubuk bawang putih\n1 sdm mustard\n1 sdm jus lemon / kecap inggris\n1 sdt bubuk paprika\n¾ sdt garam\n1 sdt gula\n¼ sdt lada hitam\n\nBahan saus mushroom:\n2 buah jamur shitake\n10 buah jamur champignon\n4 siung bawang putih halus\n5 siung bawang merah halus\nThyme secukupnya\n2 sdm mentega\n150 ml krim\n200 ml air\n¼ sdt garam\n½ sdt gula\n¼ sdt merica"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:fontFamily="@font/poppins"
+            android:background="@drawable/bgdetail"
+            android:padding="10dp"/>
+
+    </LinearLayout>
+</ScrollView>
