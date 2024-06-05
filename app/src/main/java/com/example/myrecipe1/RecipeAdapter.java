@@ -2,6 +2,9 @@ package com.example.myrecipe1;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,17 +44,19 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         DataItem recipe = recipeList.get(position);
         holder.recipeTitle.setText(recipe.getName());
         // Set the placeholder image
-        holder.recipeImage.setImageResource(R.drawable.bglogin);
+        byte[] imageBytes = Base64.decode(recipe.getPictureRecipe().substring(recipe.getPictureRecipe().indexOf(",") + 1), Base64.DEFAULT);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+        holder.recipeImage.setImageBitmap(bitmap);
         // Set default values for time and description
-        holder.recipeTime.setText("25 MIN");
-        holder.recipeDescription.setText("Default description");
+        holder.recipeTime.setText(recipe.getTime());
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), DetailActivity.class);
             intent.putExtra("nama", recipe.getName());
-            intent.putExtra("waktu", "25 mins");
+            intent.putExtra("waktu", recipe.getTime());
             intent.putExtra("ingredients", recipe.getIngredients());
             intent.putExtra("steps", recipe.getSteps());
+            intent.putExtra("image", recipe.getPictureRecipe());
             v.getContext().startActivity(intent);
         });
     }
@@ -63,15 +68,15 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
     public static class RecipeViewHolder extends RecyclerView.ViewHolder {
 
-        TextView recipeTitle, recipeTime, recipeDescription;
+        TextView recipeTitle, recipeTime, recipemins;
         ImageView recipeImage;
 
         public RecipeViewHolder(@NonNull View itemView) {
             super(itemView);
             recipeTitle = itemView.findViewById(R.id.recipe_title);
             recipeTime = itemView.findViewById(R.id.recipe_time);
-            recipeDescription = itemView.findViewById(R.id.recipe_description);
             recipeImage = itemView.findViewById(R.id.recipe_image);
+            recipemins = itemView.findViewById(R.id.recipe_time);
         }
     }
 }

@@ -13,11 +13,17 @@ public class DataItem{
 	@SerializedName("ingredients")
 	private String ingredients;
 
+	@SerializedName("time")
+	private String time;
+
 	@SerializedName("steps")
 	private String steps;
 
 	@SerializedName("id_recipe")
 	private String idRecipe;
+
+	@SerializedName("picture_recipe")
+	private String pictureRecipe;
 
 	public void setIdCategory(String idCategory){
 		this.idCategory = idCategory;
@@ -43,6 +49,14 @@ public class DataItem{
 		return ingredients;
 	}
 
+	public void setTime(String time){
+		this.time = time;
+	}
+
+	public String getTime(){
+		return time;
+	}
+
 	public void setSteps(String steps){
 		this.steps = steps;
 	}
@@ -57,5 +71,13 @@ public class DataItem{
 
 	public String getIdRecipe(){
 		return idRecipe;
+	}
+
+	public void setPictureRecipe(String pictureRecipe){
+		this.pictureRecipe = pictureRecipe;
+	}
+
+	public String getPictureRecipe(){
+		return pictureRecipe;
 	}
 }

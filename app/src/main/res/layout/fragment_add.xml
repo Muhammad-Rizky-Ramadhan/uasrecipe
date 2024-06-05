@@ -5,9 +5,76 @@
     android:layout_height="match_parent"
     tools:context=".ui.add.AddFragment">
 
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Nama Makanan -->
+            <EditText
+                android:id="@+id/etNamaMakanan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nama Makanan"
+                android:inputType="text"
+                android:padding="8dp"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Kategori Makanan -->
+            <Spinner
+                android:id="@+id/spinnerKategoriMakanan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Waktu Memasak -->
+            <EditText
+                android:id="@+id/etWaktuMemasak"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Waktu Memasak (menit)"
+                android:inputType="number"
+                android:padding="8dp"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Bahan-bahan -->
+            <EditText
+                android:id="@+id/etBahan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Bahan-bahan"
+                android:inputType="textMultiLine"
+                android:padding="8dp"
+                android:minLines="3"
+                android:gravity="top"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Cara Memasak -->
+            <EditText
+                android:id="@+id/etCaraMemasak"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Cara Memasak"
+                android:inputType="textMultiLine"
+                android:padding="8dp"
+                android:minLines="5"
+                android:gravity="top"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Tombol Submit -->
+            <Button
+                android:id="@+id/btnSubmit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tambah Resep"
+                android:layout_gravity="center_horizontal" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>

@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,7 +36,7 @@ public class ProfileFragment extends Fragment {
     private static final int PICK_IMAGE = 1;
     private static final int REQUEST_PERMISSION = 100;
     private ImageView profilePicture;
-    private Button btnEditProfile, btnLogout;
+    private ImageButton btnEditProfile, btnLogout;
 
     public static ProfileFragment newInstance() {
         return new ProfileFragment();
