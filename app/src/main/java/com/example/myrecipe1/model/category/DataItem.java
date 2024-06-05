@@ -2,7 +2,7 @@ package com.example.myrecipe1.model.category;
 
 import com.google.gson.annotations.SerializedName;
 
-public class DataItem{
+public class DataItem {
 
 	@SerializedName("picture_category")
 	private String pictureCategory;
@@ -13,27 +13,32 @@ public class DataItem{
 	@SerializedName("name_category")
 	private String nameCategory;
 
-	public void setPictureCategory(String pictureCategory){
+	public void setPictureCategory(String pictureCategory) {
 		this.pictureCategory = pictureCategory;
 	}
 
-	public String getPictureCategory(){
+	public String getPictureCategory() {
 		return pictureCategory;
 	}
 
-	public void setIdCategory(String idCategory){
+	public void setIdCategory(String idCategory) {
 		this.idCategory = idCategory;
 	}
 
-	public String getIdCategory(){
+	public String getIdCategory() {
 		return idCategory;
 	}
 
-	public void setNameCategory(String nameCategory){
+	public void setNameCategory(String nameCategory) {
 		this.nameCategory = nameCategory;
 	}
 
-	public String getNameCategory(){
+	public String getNameCategory() {
 		return nameCategory;
+	}
+
+	@Override
+	public String toString() {
+		return nameCategory; // This will be shown in the spinner
 	}
 }

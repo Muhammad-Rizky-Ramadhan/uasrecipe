@@ -1,16 +1,21 @@
 package com.example.myrecipe1.api;
 
 import com.example.myrecipe1.model.category.Category;
+import com.example.myrecipe1.model.createrecipes.Create;
 import com.example.myrecipe1.model.findrecipebycategory.Response;
 import com.example.myrecipe1.model.login.Login;
 import com.example.myrecipe1.model.recipes.Recipes;
 import com.example.myrecipe1.model.register.Register;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 public interface ApiInterface {
@@ -40,6 +45,17 @@ public interface ApiInterface {
 
     @GET("findrecipebycategory.php")
     Call<Response> findrecipebycategoryResponse(@Query("id_category") String id_category);
+
+    @Multipart
+    @POST("create.php")
+    Call<Create> createRecipe(
+            @Part("name") RequestBody name,
+            @Part("ingredients") RequestBody ingredients,
+            @Part("steps") RequestBody steps,
+            @Part("id_category") RequestBody id_category,
+            @Part("time") RequestBody time,
+            @Part MultipartBody.Part picture_recipe
+    );
 
 
 }
