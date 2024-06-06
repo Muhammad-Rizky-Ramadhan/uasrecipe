@@ -55,7 +55,7 @@ public class DetailActivity extends AppCompatActivity {
             imageView.setImageResource(R.drawable.bglogin);
         }
         titleTextView.setText(nama);
-        timeTextView.setText(waktu);
+        timeTextView.setText(waktu +" Menit");
         ingredientsTextView.setText(ingredients);
         stepsTextView.setText(steps);
 

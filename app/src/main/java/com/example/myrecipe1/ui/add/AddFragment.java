@@ -1,6 +1,7 @@
 package com.example.myrecipe1.ui.add;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -78,24 +80,7 @@ public class AddFragment extends Fragment {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = etNamaMakanan.getText().toString();
-                String ingredients = etBahan.getText().toString();
-                String steps = etCaraMemasak.getText().toString();
-                DataItem selectedCategory = (DataItem) spinnerKategoriMakanan.getSelectedItem();
-                String category = selectedCategory != null ? selectedCategory.getIdCategory() : null;
-                String time = etWaktuMemasak.getText().toString();
-
-                if (TextUtils.isEmpty(name) || TextUtils.isEmpty(ingredients) || TextUtils.isEmpty(steps) || category == null || TextUtils.isEmpty(time)) {
-                    Toast.makeText(getActivity(), "Semua field harus diisi", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                MultipartBody.Part imagePart = null;
-                if (selectedImageUri != null) {
-                    imagePart = prepareFilePart("picture_recipe", selectedImageUri);
-                }
-
-                addViewModel.addRecipe(name, ingredients, steps, category, time, imagePart);
+                showConfirmationDialog();
             }
         });
 
@@ -136,5 +121,39 @@ public class AddFragment extends Fragment {
             e.printStackTrace();
             return null;
         }
+    }
+
+    private void showConfirmationDialog() {
+        String name = etNamaMakanan.getText().toString();
+        String ingredients = etBahan.getText().toString();
+        String steps = etCaraMemasak.getText().toString();
+        DataItem selectedCategory = (DataItem) spinnerKategoriMakanan.getSelectedItem();
+        String category = selectedCategory != null ? selectedCategory.getIdCategory() : null;
+        String time = etWaktuMemasak.getText().toString();
+
+        if (TextUtils.isEmpty(name) || TextUtils.isEmpty(ingredients) || TextUtils.isEmpty(steps) || category == null || TextUtils.isEmpty(time)) {
+            Toast.makeText(getActivity(), "Semua field harus diisi", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        new AlertDialog.Builder(getActivity())
+                .setTitle("Konfirmasi")
+                .setMessage("Apakah Anda yakin ingin menambahkan resep ini?\n\n" +
+                        "Nama: " + name + "\n" +
+                        "Waktu Memasak: " + time + " Menit" +"\n" +
+                        "Kategori: " + selectedCategory.getNameCategory() + "\n" +
+                        "Bahan: " + ingredients + "\n" +
+                        "Cara Memasak: " + steps)
+                .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        MultipartBody.Part imagePart = null;
+                        if (selectedImageUri != null) {
+                            imagePart = prepareFilePart("picture_recipe", selectedImageUri);
+                        }
+                        addViewModel.addRecipe(name, ingredients, steps, category, time, imagePart);
+                    }
+                })
+                .setNegativeButton("Tidak", null)
+                .show();
     }
 }

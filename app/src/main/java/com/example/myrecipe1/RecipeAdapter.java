@@ -44,8 +44,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
         holder.recipeImage.setImageBitmap(bitmap);
         // Set default values for time and description
-        holder.recipeTime.setText(recipe.getTime());
-
+        holder.recipeTime.setText(recipe.getTime() +" Menit");
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), DetailActivity.class);
             int recipeId = Integer.parseInt(recipe.getIdRecipe());
