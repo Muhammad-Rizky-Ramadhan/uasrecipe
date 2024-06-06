@@ -4,20 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SplashActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".SplashActivity">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/app_name"
+            app:srcCompat="@drawable/bgsplash"
+            android:scaleType="centerCrop" />
+    </FrameLayout>
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/photo_6244690906183744172_y_1" />
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/etsplash"
+         />
 
-    <Button
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/etsplash2"
+        />
+
+
+    <ImageButton
         android:id="@+id/btnStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="get started"></Button>
-
+        android:layout_gravity="center"
+        android:background="@drawable/btnsplash"
+       />
 
 </LinearLayout>

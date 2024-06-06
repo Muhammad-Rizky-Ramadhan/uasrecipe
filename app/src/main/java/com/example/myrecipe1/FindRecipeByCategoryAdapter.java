@@ -47,21 +47,45 @@ public class FindRecipeByCategoryAdapter extends RecyclerView.Adapter<FindRecipe
         // Set default values for time and description
         holder.recipeTime.setText(recipe.getTime());
 
-
         holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(v.getContext(), DetailActivity.class);
+            Intent intent = new Intent(context, DetailActivity.class);
+            int recipeId = Integer.parseInt(recipe.getIdRecipe());
+            intent.putExtra("id_recipe", recipeId);
             intent.putExtra("nama", recipe.getName());
             intent.putExtra("waktu", recipe.getTime());
             intent.putExtra("ingredients", recipe.getIngredients());
             intent.putExtra("steps", recipe.getSteps());
             intent.putExtra("image", recipe.getPictureRecipe());
-            v.getContext().startActivity(intent);
+            if (context instanceof RecipesActivity) {
+                ((RecipesActivity) context).startActivityForResult(intent, RecipesActivity.REQUEST_CODE_DETAIL);
+            } else {
+                context.startActivity(intent);
+            }
         });
+
     }
 
     @Override
     public int getItemCount() {
         return recipeList.size();
+    }
+
+    // Metode untuk memperbarui seluruh data dalam list
+    public void setRecipeList(List<DataItem> newRecipeList) {
+        this.recipeList = newRecipeList;
+        notifyDataSetChanged();
+    }
+
+    // Metode untuk menambahkan satu item baru
+    public void addRecipe(DataItem newRecipe) {
+        recipeList.add(newRecipe);
+        notifyItemInserted(recipeList.size() - 1);
+    }
+
+    // Metode untuk menghapus satu item
+    public void removeRecipe(int position) {
+        recipeList.remove(position);
+        notifyItemRemoved(position);
     }
 
     public static class RecipeViewHolder extends RecyclerView.ViewHolder {

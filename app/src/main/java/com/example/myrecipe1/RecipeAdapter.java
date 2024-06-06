@@ -14,7 +14,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myrecipe1.R;
 import com.example.myrecipe1.model.recipes.DataItem;
 
 import java.util.List;
@@ -28,9 +27,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         this.context = context;
         this.recipeList = recipeList;
     }
-
-
-
 
     @NonNull
     @Override
@@ -52,6 +48,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), DetailActivity.class);
+            int recipeId = Integer.parseInt(recipe.getIdRecipe());
+            intent.putExtra("id_recipe", recipeId);
             intent.putExtra("nama", recipe.getName());
             intent.putExtra("waktu", recipe.getTime());
             intent.putExtra("ingredients", recipe.getIngredients());
@@ -64,6 +62,24 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
     @Override
     public int getItemCount() {
         return recipeList.size();
+    }
+
+    // Metode untuk memperbarui seluruh daftar resep
+    public void setRecipeList(List<DataItem> newRecipeList) {
+        this.recipeList = newRecipeList;
+        notifyDataSetChanged();
+    }
+
+    // Metode untuk menambahkan satu item baru
+    public void addRecipe(DataItem newRecipe) {
+        recipeList.add(newRecipe);
+        notifyItemInserted(recipeList.size() - 1);
+    }
+
+    // Metode untuk menghapus satu item
+    public void removeRecipe(int position) {
+        recipeList.remove(position);
+        notifyItemRemoved(position);
     }
 
     public static class RecipeViewHolder extends RecyclerView.ViewHolder {

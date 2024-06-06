@@ -2,6 +2,7 @@ package com.example.myrecipe1.api;
 
 import com.example.myrecipe1.model.category.Category;
 import com.example.myrecipe1.model.createrecipes.Create;
+import com.example.myrecipe1.model.deleterecipes.Delete;
 import com.example.myrecipe1.model.findrecipebycategory.Response;
 import com.example.myrecipe1.model.login.Login;
 import com.example.myrecipe1.model.recipes.Recipes;
@@ -55,6 +56,12 @@ public interface ApiInterface {
             @Part("id_category") RequestBody id_category,
             @Part("time") RequestBody time,
             @Part MultipartBody.Part picture_recipe
+    );
+
+    @FormUrlEncoded
+    @POST("delete.php")
+    Call<Delete> deleteRecipe(
+            @Field("id_recipe") int id_recipe
     );
 
 

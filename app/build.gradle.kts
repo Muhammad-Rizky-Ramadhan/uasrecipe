@@ -54,4 +54,6 @@ dependencies {
     implementation("org.glassfish:javax.annotation:10.0-b28")
     implementation ("com.github.bumptech.glide:glide:4.12.0")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
+    implementation ("com.google.android.material:material:1.6.0")
+
 }

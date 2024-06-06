@@ -12,7 +12,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/babypink">
+        android:background="@color/blue">
 
         <ImageView
             android:id="@+id/recipe_image"

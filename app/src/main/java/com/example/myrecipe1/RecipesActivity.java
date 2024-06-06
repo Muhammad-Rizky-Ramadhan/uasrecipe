@@ -1,7 +1,9 @@
 package com.example.myrecipe1;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,6 +21,7 @@ import retrofit2.Callback;
 
 public class RecipesActivity extends AppCompatActivity {
 
+    public static final int REQUEST_CODE_DETAIL = 1;
     private RecyclerView recyclerView;
     private FindRecipeByCategoryAdapter adapter;
     private ArrayList<DataItem> dataItemList;
@@ -36,10 +39,10 @@ public class RecipesActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         String id_category = getIntent().getStringExtra("id_category");
-        fetchrecipes(id_category);
+        fetchRecipes(id_category);
     }
 
-    private void fetchrecipes(String id_category) {
+    private void fetchRecipes(String id_category) {
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
         Call<Response> call = apiInterface.findrecipebycategoryResponse(id_category);
 
@@ -59,4 +62,15 @@ public class RecipesActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_DETAIL && resultCode == RESULT_OK) {
+            // Refresh data di sini
+            String id_category = getIntent().getStringExtra("id_category");
+            fetchRecipes(id_category);
+        }
+    }
 }
+
