@@ -4,9 +4,11 @@ import com.example.myrecipe1.model.category.Category;
 import com.example.myrecipe1.model.createrecipes.Create;
 import com.example.myrecipe1.model.deleterecipes.Delete;
 import com.example.myrecipe1.model.findrecipebycategory.Response;
+import com.example.myrecipe1.model.findrecipebyid.Findrecipebyid;
 import com.example.myrecipe1.model.login.Login;
 import com.example.myrecipe1.model.recipes.Recipes;
 import com.example.myrecipe1.model.register.Register;
+import com.example.myrecipe1.model.updatedata.Update;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -47,6 +49,9 @@ public interface ApiInterface {
     @GET("findrecipebycategory.php")
     Call<Response> findrecipebycategoryResponse(@Query("id_category") String id_category);
 
+    @GET("findrecipebyid.php")
+    Call<Findrecipebyid> findrecipebyid(@Query("id_recipe") int id_recipe);
+
     @Multipart
     @POST("create.php")
     Call<Create> createRecipe(
@@ -62,6 +67,18 @@ public interface ApiInterface {
     @POST("delete.php")
     Call<Delete> deleteRecipe(
             @Field("id_recipe") int id_recipe
+    );
+
+    @Multipart
+    @POST("update.php")
+    Call<Update> updateRecipe(
+            @Part("id_recipe") RequestBody id_recipe,
+            @Part("name") RequestBody name,
+            @Part("ingredients") RequestBody ingredients,
+            @Part("steps") RequestBody steps,
+            @Part("id_category") RequestBody id_category,
+            @Part("time") RequestBody time,
+            @Part MultipartBody.Part picture_recipe
     );
 
 

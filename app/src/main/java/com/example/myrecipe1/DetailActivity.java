@@ -1,7 +1,6 @@
 package com.example.myrecipe1;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -16,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.myrecipe1.api.ApiClient;
 import com.example.myrecipe1.api.ApiInterface;
 import com.example.myrecipe1.model.deleterecipes.Delete;
+import com.example.myrecipe1.model.findrecipebyid.Data;
+import com.example.myrecipe1.model.findrecipebyid.Findrecipebyid;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,7 +36,6 @@ public class DetailActivity extends AppCompatActivity {
         String waktu = getIntent().getStringExtra("waktu");
         String ingredients = getIntent().getStringExtra("ingredients");
         String steps = getIntent().getStringExtra("steps");
-        String imageBase64 = getIntent().getStringExtra("image");
         recipeId = getIntent().getIntExtra("id_recipe", -1);
 
         // Find views
@@ -46,18 +46,39 @@ public class DetailActivity extends AppCompatActivity {
         TextView stepsTextView = findViewById(R.id.StepsTextView);
         ImageView deleteIcon = findViewById(R.id.deleteIcon);
 
-        // Set data to views
-        if (imageBase64 != null) {
-            byte[] imageBytes = Base64.decode(imageBase64, Base64.DEFAULT);
-            Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-            imageView.setImageBitmap(bitmap);
-        } else {
-            imageView.setImageResource(R.drawable.bglogin);
-        }
         titleTextView.setText(nama);
-        timeTextView.setText(waktu +" Menit");
+        timeTextView.setText(waktu + " Menit");
         ingredientsTextView.setText(ingredients);
         stepsTextView.setText(steps);
+
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<Findrecipebyid> call = apiInterface.findrecipebyid(recipeId);
+        call.enqueue(new Callback<Findrecipebyid>() {
+            @Override
+            public void onResponse(Call<Findrecipebyid> call, Response<Findrecipebyid> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Data recipe = response.body().getData();
+
+                    // Set data to views
+                    String imageBase64 = recipe.getPictureRecipe();
+                    if (imageBase64 != null) {
+                        byte[] imageBytes = Base64.decode(imageBase64, Base64.DEFAULT);
+                        Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+                        imageView.setImageBitmap(bitmap);
+                    } else {
+                        imageView.setImageResource(R.drawable.bglogin);
+                    }
+
+                } else {
+                    Toast.makeText(DetailActivity.this, "Failed to load recipe details", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Findrecipebyid> call, Throwable t) {
+                Toast.makeText(DetailActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         // Set delete icon click listener
         deleteIcon.setOnClickListener(v -> {

@@ -53,7 +53,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
             intent.putExtra("waktu", recipe.getTime());
             intent.putExtra("ingredients", recipe.getIngredients());
             intent.putExtra("steps", recipe.getSteps());
-            intent.putExtra("image", recipe.getPictureRecipe());
             v.getContext().startActivity(intent);
         });
     }
