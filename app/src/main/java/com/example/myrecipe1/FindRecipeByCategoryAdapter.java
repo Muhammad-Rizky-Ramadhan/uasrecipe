@@ -55,7 +55,6 @@ public class FindRecipeByCategoryAdapter extends RecyclerView.Adapter<FindRecipe
             intent.putExtra("waktu", recipe.getTime());
             intent.putExtra("ingredients", recipe.getIngredients());
             intent.putExtra("steps", recipe.getSteps());
-            intent.putExtra("image", recipe.getPictureRecipe());
             if (context instanceof RecipesActivity) {
                 ((RecipesActivity) context).startActivityForResult(intent, RecipesActivity.REQUEST_CODE_DETAIL);
             } else {

@@ -1,6 +1,7 @@
 package com.example.myrecipe1;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -45,6 +46,7 @@ public class DetailActivity extends AppCompatActivity {
         TextView ingredientsTextView = findViewById(R.id.ingredientsTextView);
         TextView stepsTextView = findViewById(R.id.StepsTextView);
         ImageView deleteIcon = findViewById(R.id.deleteIcon);
+        ImageView editIcon = findViewById(R.id.editIcon);
 
         titleTextView.setText(nama);
         timeTextView.setText(waktu + " Menit");
@@ -80,6 +82,8 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
+
+
         // Set delete icon click listener
         deleteIcon.setOnClickListener(v -> {
             if (recipeId != -1) {
@@ -88,6 +92,16 @@ public class DetailActivity extends AppCompatActivity {
                 Toast.makeText(DetailActivity.this, "Invalid Recipe ID", Toast.LENGTH_SHORT).show();
             }
         });
+
+        editIcon.setOnClickListener(v -> {
+            // Di sini Anda dapat membuka aktivitas edit dengan menyertakan ID resep
+            Intent intent = new Intent(DetailActivity.this, EditRecipeActivity.class);
+            intent.putExtra("id_recipe", recipeId);
+            startActivity(intent);
+        });
+
+
+
     }
 
     private void showDeleteConfirmationDialog(final int recipeId) {
