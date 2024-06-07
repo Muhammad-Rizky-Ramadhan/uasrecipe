@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -27,10 +28,12 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.myrecipe1.R;
+import com.example.myrecipe1.SessionManager;
 import com.example.myrecipe1.model.category.DataItem;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import okhttp3.MediaType;
@@ -40,6 +43,8 @@ import okhttp3.RequestBody;
 public class AddFragment extends Fragment {
 
     private static final int PICK_IMAGE_REQUEST = 1;
+
+    SessionManager sessionManager;
     private AddViewModel addViewModel;
     private EditText etNamaMakanan, etWaktuMemasak, etBahan, etCaraMemasak;
     private Spinner spinnerKategoriMakanan;
@@ -59,6 +64,17 @@ public class AddFragment extends Fragment {
         ivSelectedImage = root.findViewById(R.id.ivSelectedImage);
         btnPickImage = root.findViewById(R.id.btnPickImage);
         btnSubmit = root.findViewById(R.id.btnSubmit);
+
+        TextView nameuser = root.findViewById(R.id.nameuser);
+        TextView usernamenameuser = root.findViewById(R.id.usernameuser);
+
+        sessionManager = new SessionManager(getActivity());
+
+        if (sessionManager.isLoggedIn()) {
+            HashMap<String, String> user = sessionManager.getUserDetail();
+            nameuser.setText(user.get(SessionManager.NAME));
+            usernamenameuser.setText(user.get(SessionManager.USERNAME));
+        }
 
         addViewModel = new ViewModelProvider(this).get(AddViewModel.class);
 

@@ -31,7 +31,7 @@ public class HomeViewModel extends ViewModel {
     }
 
 
-    private void fetchRecipes() {
+    public void fetchRecipes() {
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
         Call<Recipes> call = apiInterface.RecipesResponse();
 

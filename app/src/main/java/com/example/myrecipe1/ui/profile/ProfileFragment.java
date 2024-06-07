@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,6 +46,10 @@ public class ProfileFragment extends Fragment {
     private RecyclerView bookmarkRecyclerView;
     private BookmarkAdapter bookmarkAdapter;
     private ProfileViewModel profileViewModel;
+
+    private Handler handler;
+    private Runnable runnable;
+    private static final long REFRESH_INTERVAL = 10000;
 
     public static ProfileFragment newInstance() {
         return new ProfileFragment();
@@ -110,8 +115,30 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        handler = new Handler();
 
         return root;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                profileViewModel.loadBookmarks();
+                handler.postDelayed(this, REFRESH_INTERVAL);
+            }
+        };
+        handler.post(runnable);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        // Stop the periodic data refresh
+        handler.removeCallbacks(runnable);
     }
 
     private void openGallery() {

@@ -1,6 +1,7 @@
 package com.example.myrecipe1.ui.home;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,10 @@ public class HomeFragment extends Fragment {
     private SessionManager sessionManager;
     private TextView greetingText;
 
+    private Handler handler;
+    private Runnable runnable;
+    private static final long REFRESH_INTERVAL = 10000;
+
     public static HomeFragment newInstance() {
         return new HomeFragment();
     }
@@ -59,6 +64,8 @@ public class HomeFragment extends Fragment {
         adapter = new RecipeAdapter(getContext(), dataItemList);
         recyclerView.setAdapter(adapter);
 
+        handler = new Handler();
+
         return rootView;
     }
 
@@ -82,10 +89,22 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
             }
         });
+
+        // Start the periodic data refresh
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                mViewModel.fetchRecipes();
+                handler.postDelayed(this, REFRESH_INTERVAL);
+            }
+        };
+        handler.post(runnable);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        // Stop the periodic data refresh
+        handler.removeCallbacks(runnable);
     }
 }

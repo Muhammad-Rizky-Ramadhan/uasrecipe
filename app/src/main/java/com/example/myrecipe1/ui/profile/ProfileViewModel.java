@@ -27,7 +27,7 @@ public class ProfileViewModel extends ViewModel {
         return bookmarks;
     }
 
-    private void loadBookmarks() {
+    public void loadBookmarks() {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<Viewbookmark> call = apiService.ViewBookmarkResponse();
         call.enqueue(new Callback<Viewbookmark>() {
