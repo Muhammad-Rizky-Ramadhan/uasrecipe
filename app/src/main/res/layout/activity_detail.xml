@@ -96,7 +96,7 @@
             android:layout_marginTop="8dp"
             android:text=""
             android:textSize="16sp"
-            android:textColor="@android:color/black"
+            android:textColor="@color/red"
             android:fontFamily="@font/poppins"
             android:background="@drawable/bgdetail"
             android:padding="10dp"/>
@@ -121,7 +121,7 @@
             android:layout_marginTop="8dp"
             android:text=""
             android:textSize="16sp"
-            android:textColor="@android:color/black"
+            android:textColor="@color/red"
             android:fontFamily="@font/poppins"
             android:padding="10dp"
             android:background="@drawable/bgdetail"/>

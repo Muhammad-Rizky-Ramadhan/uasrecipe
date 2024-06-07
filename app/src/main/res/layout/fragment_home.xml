@@ -60,9 +60,9 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/ethome2"
-            android:layout_margin="5dp" />
+            android:src="@drawable/ethome2" />
 
         <HorizontalScrollView
             android:layout_width="match_parent"
