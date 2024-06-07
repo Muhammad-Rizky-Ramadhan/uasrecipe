@@ -10,7 +10,6 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,14 +19,20 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myrecipe1.LoginActivity;
+import com.example.myrecipe1.BookmarkAdapter;
 import com.example.myrecipe1.R;
 import com.example.myrecipe1.SessionManager;
 import com.example.myrecipe1.SplashActivity;
+import com.example.myrecipe1.model.viewbookmark.DataItem;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 public class ProfileFragment extends Fragment {
     TextView etUsername, etName;
@@ -37,6 +42,9 @@ public class ProfileFragment extends Fragment {
     private static final int REQUEST_PERMISSION = 100;
     private ImageView profilePicture;
     private ImageButton btnEditProfile, btnLogout;
+    private RecyclerView bookmarkRecyclerView;
+    private BookmarkAdapter bookmarkAdapter;
+    private ProfileViewModel profileViewModel;
 
     public static ProfileFragment newInstance() {
         return new ProfileFragment();
@@ -52,6 +60,7 @@ public class ProfileFragment extends Fragment {
         btnLogout = root.findViewById(R.id.btnLogout);
         etName = root.findViewById(R.id.nameProfile);
         etUsername = root.findViewById(R.id.usernameProfile);
+        bookmarkRecyclerView = root.findViewById(R.id.bookmark_recycleview);
 
         sessionManager = new SessionManager(getActivity());
 
@@ -85,6 +94,23 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        // Set up RecyclerView
+        bookmarkRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        bookmarkAdapter = new BookmarkAdapter(null);
+        bookmarkRecyclerView.setAdapter(bookmarkAdapter);
+
+        // Set up ViewModel
+        profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
+        profileViewModel.getBookmarks().observe(getViewLifecycleOwner(), new Observer<List<DataItem>>() {
+            @Override
+            public void onChanged(List<DataItem> dataItems) {
+                if (dataItems != null) {
+                    bookmarkAdapter.setBookmarkList(dataItems);
+                }
+            }
+        });
+
+
         return root;
     }
 
@@ -100,7 +126,7 @@ public class ProfileFragment extends Fragment {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 openGallery();
             } else {
-                // Izin ditolak, tampilkan pesan kepada pengguna
+                // Permission denied, display a message to the user
             }
         }
     }

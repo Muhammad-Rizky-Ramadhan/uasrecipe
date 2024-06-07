@@ -11,6 +11,7 @@ import com.example.myrecipe1.model.login.Login;
 import com.example.myrecipe1.model.recipes.Recipes;
 import com.example.myrecipe1.model.register.Register;
 import com.example.myrecipe1.model.updatedata.Update;
+import com.example.myrecipe1.model.viewbookmark.Viewbookmark;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -92,6 +93,9 @@ public interface ApiInterface {
     @POST("isbookmarked.php")
     @FormUrlEncoded
     Call<IsBookmarkedResponse> isBookmarked(@Field("id_recipe") int id);
+
+    @GET("viewbookmark.php") // Add this line
+    Call<Viewbookmark> ViewBookmarkResponse();
 
 
 

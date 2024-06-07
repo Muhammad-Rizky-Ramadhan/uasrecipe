@@ -1,107 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".ui.profile.ProfileFragment">
 
-    <!-- Profile Header -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:background="@drawable/bgprofile">
+        android:orientation="vertical">
 
+        <!-- Profile Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/bgprofile">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/etprofile"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_gravity="left"/>
+
+            <!-- Profile Image -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="100dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp">
+                <ImageView
+                    android:id="@+id/profilePicture"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/baseline_account_circle_24"/>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Name -->
+            <TextView
+                android:id="@+id/nameProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:textSize="24sp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:paddingTop="8dp"/>
+
+            <!-- Username -->
+            <TextView
+                android:id="@+id/usernameProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="username"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:paddingTop="4dp"
+                android:paddingBottom="16dp"/>
+        </LinearLayout>
+
+        <!-- Edit Profile and Logout Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/btnEditProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit Profile"
+                android:layout_margin="8dp"
+                android:background="@drawable/btneditprofile"/>
+
+            <ImageButton
+                android:id="@+id/btnLogout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Logout"
+                android:layout_margin="8dp"
+                android:background="@drawable/btnlogout"/>
+        </LinearLayout>
+
+        <!-- CookMark Section -->
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/etprofile"
+            android:src="@drawable/etprofile2"
             android:layout_marginTop="15dp"
             android:layout_marginLeft="20dp"
             android:layout_gravity="left"/>
 
-        <!-- Profile Image -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="100dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp">
-            <ImageView
-                android:id="@+id/profilePicture"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/baseline_account_circle_24"/>
-        </androidx.cardview.widget.CardView>
+        <!-- RecyclerView for displaying food items -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/bookmark_recycleview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:clipToPadding="false"
+            android:layout_marginTop="10dp"
+            tools:listitem="@layout/list_recipes" />
 
-        <!-- Name -->
-        <TextView
-            android:id="@+id/nameProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Name"
-            android:textSize="24sp"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:paddingTop="8dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
 
-        <!-- Username -->
-        <TextView
-            android:id="@+id/usernameProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="username"
-            android:textSize="18sp"
-            android:gravity="center"
-            android:paddingTop="4dp"
-            android:paddingBottom="16dp"/>
+        </LinearLayout>
     </LinearLayout>
 
-    <!-- Edit Profile and Logout Buttons -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center">
-
-        <ImageButton
-            android:id="@+id/btnEditProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Edit Profile"
-            android:layout_margin="8dp"
-            android:background="@drawable/btneditprofile"/>
-
-        <ImageButton
-            android:id="@+id/btnLogout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Logout"
-            android:layout_margin="8dp"
-            android:background="@drawable/btnlogout"/>
-    </LinearLayout>
-
-    <!-- CookMark Section -->
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/etprofile2"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="20dp"
-        android:layout_gravity="left"/>
-
-    <!-- RecyclerView for displaying food items -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/Recipess_recycleview"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:padding="8dp"
-        android:clipToPadding="false"
-        android:layout_marginTop="10dp"
-        tools:listitem="@layout/list_recipes" />
-</LinearLayout>
+</ScrollView>
