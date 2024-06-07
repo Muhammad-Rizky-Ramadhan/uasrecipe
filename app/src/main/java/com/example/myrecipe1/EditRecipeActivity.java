@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -60,8 +61,8 @@ public class EditRecipeActivity extends AppCompatActivity {
         editTextInstructions = findViewById(R.id.editTextInstructions);
         spinnerKategoriMakanan = findViewById(R.id.spinnerKategoriMakanan);
         imageViewRecipe = findViewById(R.id.imageViewRecipe);
-        Button buttonPickImage = findViewById(R.id.buttonPickImage);
-        Button buttonSave = findViewById(R.id.buttonSave);
+        ImageButton buttonPickImage = findViewById(R.id.buttonPickImage);
+        ImageButton buttonSave = findViewById(R.id.buttonSave);
 
         // Set click listener for image picker
         buttonPickImage.setOnClickListener(new View.OnClickListener() {

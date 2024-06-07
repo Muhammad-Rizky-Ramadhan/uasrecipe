@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -43,7 +44,7 @@ public class AddFragment extends Fragment {
     private EditText etNamaMakanan, etWaktuMemasak, etBahan, etCaraMemasak;
     private Spinner spinnerKategoriMakanan;
     private ImageView ivSelectedImage;
-    private Button btnPickImage, btnSubmit;
+    private ImageButton btnPickImage, btnSubmit;
     private Uri selectedImageUri;
 
     public View onCreateView(@NonNull LayoutInflater inflater,

@@ -3,12 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    tools:context=".ui.add.AddFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:src="@drawable/etedit"
+            android:layout_margin="5dp"/>
 
         <!-- Nama Makanan -->
         <EditText
@@ -18,14 +26,19 @@
             android:hint="Nama Makanan"
             android:inputType="text"
             android:padding="8dp"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/red"
+            android:background="@drawable/bgdetail" />
 
         <!-- Kategori Makanan -->
         <Spinner
             android:id="@+id/spinnerKategoriMakanan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/red"
+            android:background="@drawable/bgdetail"
+            android:padding="5dp" />
 
         <!-- Waktu Memasak -->
         <EditText
@@ -35,7 +48,9 @@
             android:hint="Waktu Memasak (menit)"
             android:inputType="number"
             android:padding="8dp"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/red"
+            android:background="@drawable/bgdetail" />
 
         <!-- Bahan-bahan -->
         <EditText
@@ -47,7 +62,9 @@
             android:padding="8dp"
             android:minLines="3"
             android:gravity="top"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/red"
+            android:background="@drawable/bgdetail" />
 
         <!-- Cara Memasak -->
         <EditText
@@ -59,7 +76,9 @@
             android:padding="8dp"
             android:minLines="5"
             android:gravity="top"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/red"
+            android:background="@drawable/bgdetail" />
 
         <!-- Image Picker -->
         <ImageView
@@ -69,23 +88,26 @@
             android:layout_marginBottom="16dp"
             android:contentDescription="Selected Image"
             android:scaleType="centerCrop"
-            android:background="@android:color/darker_gray" />
+            android:background="@drawable/bgdetail" />
 
-        <Button
+        <ImageButton
             android:id="@+id/buttonPickImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pilih Gambar"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="16dp" />
+            android:layout_gravity="right"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/btngambar"
+            android:contentDescription="Pick Image" />
 
         <!-- Tombol Submit -->
-        <Button
+        <ImageButton
             android:id="@+id/buttonSave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Simpan Perubahan"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/btnadd2"
+            android:contentDescription="Save Changes" />
     </LinearLayout>
 
 </ScrollView>

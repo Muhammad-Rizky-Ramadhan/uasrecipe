@@ -1,19 +1,68 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.add.AddFragment">
+    android:padding="16dp"
+    tools:context=".ui.add.AddFragment"
+    android:scrollbars="none">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:src="@drawable/etadd2" />
+
+        <!-- Profile Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingBottom="24dp">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/baseline_account_circle_24"
+                android:layout_marginEnd="16dp"
+                android:contentDescription="Profile Picture"
+                android:scaleType="centerCrop"
+                 />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Marsya"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="#6F3F35" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="marsyaamc_"
+                    android:textColor="#C38E89"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Form Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
 
             <!-- Nama Makanan -->
             <EditText
@@ -23,14 +72,18 @@
                 android:hint="Nama Makanan"
                 android:inputType="text"
                 android:padding="8dp"
-                android:layout_marginBottom="16dp" />
+                android:layout_marginBottom="16dp"
+                android:textColor="@color/red"
+                android:background="@drawable/bgdetail" />
 
             <!-- Kategori Makanan -->
             <Spinner
                 android:id="@+id/spinnerKategoriMakanan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp" />
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/bgdetail"
+                android:padding="5dp"/>
 
             <!-- Waktu Memasak -->
             <EditText
@@ -40,7 +93,9 @@
                 android:hint="Waktu Memasak (menit)"
                 android:inputType="number"
                 android:padding="8dp"
-                android:layout_marginBottom="16dp" />
+                android:layout_marginBottom="16dp"
+                android:textColor="@color/red"
+                android:background="@drawable/bgdetail" />
 
             <!-- Bahan-bahan -->
             <EditText
@@ -52,7 +107,9 @@
                 android:padding="8dp"
                 android:minLines="3"
                 android:gravity="top"
-                android:layout_marginBottom="16dp" />
+                android:layout_marginBottom="16dp"
+                android:textColor="@color/red"
+                android:background="@drawable/bgdetail"/>
 
             <!-- Cara Memasak -->
             <EditText
@@ -64,51 +121,47 @@
                 android:padding="8dp"
                 android:minLines="5"
                 android:gravity="top"
-                android:layout_marginBottom="16dp" />
+                android:layout_marginBottom="16dp"
+                android:textColor="@color/red"
+                android:background="@drawable/bgdetail" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <!-- Image Picker -->
+            <ImageView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:scaleType="centerCrop"
+                android:src="@drawable/etadd" />
 
-                <!-- Other fields... -->
+            <ImageView
+                android:id="@+id/ivSelectedImage"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginBottom="16dp"
+                android:contentDescription="Selected Image"
+                android:scaleType="centerCrop"
+                android:background="@drawable/bgdetail" />
 
-                <!-- Image Picker -->
-                <ImageView
-                    android:id="@+id/ivSelectedImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_marginBottom="16dp"
-                    android:contentDescription="Selected Image"
-                    android:scaleType="centerCrop"
-                    android:background="@android:color/darker_gray" />
-
-                <Button
-                    android:id="@+id/btnPickImage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Pilih Gambar"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="16dp" />
-
-                <!-- Tombol Submit -->
-                <Button
-                    android:id="@+id/btnSubmit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Tambah Resep"
-                    android:layout_gravity="center_horizontal" />
-            </LinearLayout>
-
+            <ImageButton
+                android:id="@+id/btnPickImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/btngambar"/>
 
             <!-- Tombol Submit -->
+            <ImageButton
+                android:id="@+id/btnSubmit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/btnadd2"/>
+
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="50dp">
-
             </LinearLayout>
-
         </LinearLayout>
-    </ScrollView>
-
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>
