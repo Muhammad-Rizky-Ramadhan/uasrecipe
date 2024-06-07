@@ -18,6 +18,8 @@ import com.example.myrecipe1.api.ApiInterface;
 import com.example.myrecipe1.model.deleterecipes.Delete;
 import com.example.myrecipe1.model.findrecipebyid.Data;
 import com.example.myrecipe1.model.findrecipebyid.Findrecipebyid;
+import com.example.myrecipe1.model.bookmark.Addbookmark;
+import com.example.myrecipe1.model.isbookmark.IsBookmarkedResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,6 +28,7 @@ import retrofit2.Response;
 public class DetailActivity extends AppCompatActivity {
 
     private int recipeId;
+    private ImageView bookmarkIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,7 @@ public class DetailActivity extends AppCompatActivity {
         TextView stepsTextView = findViewById(R.id.StepsTextView);
         ImageView deleteIcon = findViewById(R.id.deleteIcon);
         ImageView editIcon = findViewById(R.id.editIcon);
+        bookmarkIcon = findViewById(R.id.bookmarkIcon);
 
         titleTextView.setText(nama);
         timeTextView.setText(waktu + " Menit");
@@ -82,7 +86,10 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
-
+        // Check if the recipe is bookmarked
+        if (recipeId != -1) {
+            checkIfRecipeBookmarked(recipeId, true); // The second parameter indicates this is the initial check
+        }
 
         // Set delete icon click listener
         deleteIcon.setOnClickListener(v -> {
@@ -100,8 +107,13 @@ public class DetailActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-
-
+        bookmarkIcon.setOnClickListener(v -> {
+            if (recipeId != -1) {
+                checkIfRecipeBookmarked(recipeId, false); // This is the check for the bookmark click
+            } else {
+                Toast.makeText(DetailActivity.this, "Invalid Recipe ID", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void showDeleteConfirmationDialog(final int recipeId) {
@@ -138,6 +150,65 @@ public class DetailActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Delete> call, Throwable t) {
+                Toast.makeText(DetailActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void checkIfRecipeBookmarked(int id, boolean isInitialCheck) {
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<IsBookmarkedResponse> call = apiInterface.isBookmarked(id);
+
+        call.enqueue(new Callback<IsBookmarkedResponse>() {
+            @Override
+            public void onResponse(Call<IsBookmarkedResponse> call, Response<IsBookmarkedResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    if (response.body().isIsBookmarked()) {
+                        bookmarkIcon.setImageResource(R.drawable.ic_bookmarked);
+                        if (!isInitialCheck) {
+                            new AlertDialog.Builder(DetailActivity.this)
+                                    .setTitle("Already Bookmarked")
+                                    .setMessage("This recipe is already bookmarked.")
+                                    .setPositiveButton("OK", null)
+                                    .show();
+                        }
+                    } else if (!isInitialCheck) {
+                        bookmarkRecipe(id);
+                    }
+                } else {
+                    Toast.makeText(DetailActivity.this, "Failed to check bookmark status", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<IsBookmarkedResponse> call, Throwable t) {
+                Toast.makeText(DetailActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void bookmarkRecipe(int id) {
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<Addbookmark> call = apiInterface.bookmarkRecipe(id);
+
+        call.enqueue(new Callback<Addbookmark>() {
+            @Override
+            public void onResponse(Call<Addbookmark> call, Response<Addbookmark> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    if (response.body().isStatus()) {
+                        Toast.makeText(DetailActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        // Change the bookmark icon to indicate it's bookmarked
+                        bookmarkIcon.setImageResource(R.drawable.ic_bookmarked); // Use your bookmarked icon resource
+                    } else {
+                        Toast.makeText(DetailActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(DetailActivity.this, "Failed to bookmark recipe", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Addbookmark> call, Throwable t) {
                 Toast.makeText(DetailActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

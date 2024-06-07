@@ -1,10 +1,12 @@
 package com.example.myrecipe1.api;
 
+import com.example.myrecipe1.model.bookmark.Addbookmark;
 import com.example.myrecipe1.model.category.Category;
 import com.example.myrecipe1.model.createrecipes.Create;
 import com.example.myrecipe1.model.deleterecipes.Delete;
 import com.example.myrecipe1.model.findrecipebycategory.Response;
 import com.example.myrecipe1.model.findrecipebyid.Findrecipebyid;
+import com.example.myrecipe1.model.isbookmark.IsBookmarkedResponse;
 import com.example.myrecipe1.model.login.Login;
 import com.example.myrecipe1.model.recipes.Recipes;
 import com.example.myrecipe1.model.register.Register;
@@ -80,6 +82,17 @@ public interface ApiInterface {
             @Part("time") RequestBody time,
             @Part MultipartBody.Part picture_recipe
     );
+
+    @FormUrlEncoded
+    @POST("addBookmark.php")
+    Call<Addbookmark> bookmarkRecipe(
+            @Field("id_recipe") int id_recipe
+    );
+
+    @POST("isbookmarked.php")
+    @FormUrlEncoded
+    Call<IsBookmarkedResponse> isBookmarked(@Field("id_recipe") int id);
+
 
 
 }
