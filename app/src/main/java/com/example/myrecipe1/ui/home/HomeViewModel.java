@@ -47,7 +47,7 @@ public class HomeViewModel extends ViewModel {
 
             @Override
             public void onFailure(Call<Recipes> call, Throwable t) {
-                
+                errorMessage.setValue("Failed to connect to the server");
             }
         });
     }
